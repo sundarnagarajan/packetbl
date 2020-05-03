@@ -4415,24 +4415,6 @@ cat >>confdefs.h <<\_ACEOF
 _ACEOF
 
 	LIBS="$LIBS -lpool"
-
-else
-	dpkg -l | grep libdotconf-dev > /dev/null
-	if [ $? ]; then
-		cd /usr/share/doc/libdotconf-dev/examples/libpool/
-		gzip -d pool.c.gz > /dev/null
-		make > /dev/null
-		cp libpool.a /usr/lib
-		cp libpool.h /usr/include
-	else
-		{ { $as_echo "$as_me:$LINENO: error: in \`$ac_pwd':" >&5
-		$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-		{ { $as_echo "$as_me:$LINENO: error: You must have dotconf (libpool), install the package \"libdotconf-dev\"
-See \`config.log' for more details." >&5
-$as_echo "$as_me: error: You must have dotconf (libpool), install the package \"libdotconf-dev\"
-See \`config.log' for more details." >&2;}
-		{ (exit 1); exit 1; }; }; }
-	fi
 fi
 
 

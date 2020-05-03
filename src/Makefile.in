@@ -12,12 +12,16 @@ VERSION	= @PACKAGE_VERSION@
 CFLAGS	= @CFLAGS@ @PTHREAD_CFLAGS@
 LDFLAGS = @LDFLAGS@
 DEFS	= @DEFS@ -DCONFIGFILE=\"$(CONFIGFILE)\"
-LIBS	= @LIBS@ @PTHREAD_LIBS@
+LIBS	= @LIBS@ @PTHREAD_LIBS@ libpool.a
 CC	= @CC@
-INCLUDES	= -I /usr/include/libnetfilter_queue -I /usr/include/ldns
+INCLUDES	= -I /usr/include/libnetfilter_queue -I /usr/include/ldns -I .
 
 
-all: packetbl packetbl_getstat
+all: libpool.a packetbl packetbl_getstat
+
+libpool.a:
+	cc    -c -o pool.o pool.c
+	ar Urv libpool.a pool.o
 
 packetbl: packetbl.o
 	$(CC) $(CFLAGS) $(LDFLAGS) packetbl.o -o ../bin/packetbl $(LIBS)
@@ -32,7 +36,7 @@ packetbl_getstat.o: config.h packetbl_getstat.c packetbl.h
 	$(CC) $(CFLAGS) -c $(DEFS) packetbl_getstat.c -o packetbl_getstat.o
 
 clean:
-	-rm -f packetbl.o ../bin/packetbl packetbl_getstat.o ../bin/packetbl_getstat ../packetbl_$(VERSION).deb
+	-rm -f packetbl.o ../bin/packetbl packetbl_getstat.o ../bin/packetbl_getstat ../packetbl_$(VERSION).deb pool.o libpool.a
 
 distclean:
 	-rm -f Makefile packetbl.o ../bin/packetbl packetbl_getstat.o ../bin/packetbl_getstat config.log config.status config.h ../packetbl_$(VERSION).deb
