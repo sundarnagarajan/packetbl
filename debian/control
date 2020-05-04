@@ -1,0 +1,10 @@
+Source: packetbl
+Section: net
+Maintainer: Sundar Nagarajan <sun.nagarajan@gmail.com>
+Build-Depends: debhelper (>= 11), unzip, libdotconf-dev, libnetfilter-queue-dev, libldns-dev, libfirestring-dev, libfiredns-dev
+
+Package: packetbl
+Section: net
+Architecture: amd64
+Depends: libdotconf0, libldns2, libnetfilter-queue1, libnfnetlink0, libfirestring0.9, libfiredns0.9, firedns
+Description: Packetbl will reject or will drop a connection if a DNS server resolves the queried client IP.

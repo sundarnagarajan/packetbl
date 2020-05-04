@@ -1,0 +1,8 @@
+Package: packetbl
+Version: 0.8-beta3build02
+Architecture: amd64
+Maintainer: Sundar Nagarajan <sun.nagarajan@gmail.com>
+Installed-Size: 61
+Depends: libdotconf0, libldns2, libnetfilter-queue1, libnfnetlink0, libfirestring0.9, libfiredns0.9, firedns
+Section: net
+Description: Packetbl will reject or will drop a connection if a DNS server resolves the queried client IP.

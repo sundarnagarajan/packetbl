@@ -44,6 +44,9 @@ distclean:
 deb: all
 	/bin/bash ./gen_package.sh $(prefix)
 
+extract_deb: deb
+	dpkg-deb -X ../packetbl_$(VERSION).deb ${DEST_DIR}
+
 install: deb
 	-$(INSTALL) -d $(bindir)
 	-$(INSTALL) -d $(sysconfdir)

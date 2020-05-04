@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+PKG_NAME = packetbl
+VERSION = 0.8-beta3build02
+
+DISTRIBUTION = $(shell sed -n "s/^VERSION_CODENAME=//p" /etc/os-release)
+PACKAGEVERSION = $(VERSION)-0~$(DISTRIBUTION)0
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	cd src; make -f Makefile.in clean
+override dh_autoconfigure:
+override_dh_auto_build:
+	src/build.sh
+	rm -rf debian/$(PKG_NAME)/usr debian/$(PKG_NAME)/etc
+	cd src; make deb
+	cd src; DEST_DIR=../debian/$(PKG_NAME) make extract_deb
+override_dh_auto_test:
+override_dh_prep:
+	mkdir -p debian/$(PKG_NAME)/DEBIAN
+	cp debian/binary-control debian/$(PKG_NAME)/DEBIAN/control
+	cp debian/$(PKG_NAME).files debian/$(PKG_NAME)/DEBIAN/files
+	cp debian/postinst debian/$(PKG_NAME)/DEBIAN/postinst
+override_dh_usrlocal:
+override_dh_auto_install:
+override_dh_gencontrol:
+	dh_gencontrol -v $(VERSION)

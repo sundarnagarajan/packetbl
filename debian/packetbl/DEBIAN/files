@@ -1,0 +1,6 @@
+etc/init.d/packetbl
+usr/local/etc/packetbl/examples/optional_resolvers
+usr/local/etc/packetbl/examples/optionalResolvers
+usr/local/etc/packetbl/examples/packetbl.conf
+usr/local/bin/packetbl
+usr/local/bin/packetbl_getstat

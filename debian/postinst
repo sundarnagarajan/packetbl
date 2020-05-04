@@ -1,0 +1,5 @@
+chmod 755 /usr/bin/packetbl
+chmod 755 /usr/bin/packetbl_getstat
+/etc/init.d/packetbl restart
+
+exit 0

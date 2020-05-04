@@ -11,6 +11,7 @@ src/packetbl_getstat.o
 src/libpool.a
 src/libpool.h
 src/pool.c
+deb_build
 
 
 packetbl.deb
