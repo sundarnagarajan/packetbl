@@ -19,7 +19,7 @@
 
 BIN=/usr/bin/packetbl
 # Don't worry about PID - assume systemd can take care of it
-PID_PATH=/dev/null
+PID_PATH=/run/packetbl.pid
 ACTION=$1
 
 
@@ -58,6 +58,7 @@ run_start()
 	if [ "x$CONFIG_FILES" != "x" ]; then
 		for FILE in $CONFIG_FILES
 		do
+            rm -f $PID_PATH
 			$BIN -f $FILE -p $PID_PATH
 		done
 	fi
