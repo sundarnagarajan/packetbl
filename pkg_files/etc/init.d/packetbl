@@ -9,18 +9,29 @@
 # Short-Description:	RBL client
 ### END INIT INFO
 
+# Changed to get config files as follows:
+# All of the following are INDIVIDUALLY used:
+#   /etc/packetbl.conf
+#   /etc/packetbl.d/*.conf
+# Running MULTIPLE instances with different config files seems like
+# rare use-case
 
 
-
-BIN=/usr/local/bin/packetbl
-ETC_PATH=/usr/local/etc/packetbl
+BIN=/usr/bin/packetbl
+# Don't worry about PID - assume systemd can take care of it
+PID_PATH=/dev/null
 ACTION=$1
 
 
 get_config_files() {
-
-	CONFIG_FILES=`find $ETC_PATH -maxdepth 1 -name *.conf`
-	# get files with theirs path include
+    CONFIG_FILES=""
+    local CONFIG_FILES_CANDIDATES=$(ls -1 etc/packetbl.conf etc/packetbl.d/*.conf 2>/dev/null)
+    for f in $CONFIG_FILES_CANDIDATES
+    do
+        if [ -f "$f" ]; then
+            CONFIG_FILES="${CONFIG_FILES} $f"
+        fi
+    done
 }
 
 
@@ -47,7 +58,7 @@ run_start()
 	if [ "x$CONFIG_FILES" != "x" ]; then
 		for FILE in $CONFIG_FILES
 		do
-			$BIN -f $FILE
+			$BIN -f $FILE -p $PID_PATH
 		done
 	fi
 }
@@ -67,7 +78,6 @@ case "$ACTION" in
 	run_stop
 	run_start
 	;;
-
   *)
 	echo "Usage: /etc/init.d/packetbl {start|stop|restart}" 
 	exit 1
