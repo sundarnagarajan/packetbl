@@ -41,6 +41,7 @@ echo "#!/bin/bash
 $HEAD
 
 chmod 755 ${BIN_DIR}/packetbl
+chmod 755 ${BIN_DIR}/packetbl_getstat
 /etc/init.d/packetbl restart
 
 exit 0;" > $PACKAGE_DIR/DEBIAN/postinst
@@ -157,6 +158,7 @@ mkdir -p ${PACKAGE_DIR}/$BIN_DIR
 mkdir -p ${PACKAGE_DIR}/$ETC_DIR
 
 cp ../bin/packetbl ${PACKAGE_DIR}/$BIN_DIR
+cp ../bin/packetbl_getstat ${PACKAGE_DIR}/$BIN_DIR
 cp -r examples ${PACKAGE_DIR}/$ETC_DIR
 
 # Create the Debian package
