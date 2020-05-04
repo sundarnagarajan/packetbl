@@ -41,21 +41,21 @@ clean:
 distclean:
 	-rm -f Makefile packetbl.o ../bin/packetbl packetbl_getstat.o ../bin/packetbl_getstat config.log config.status config.h ../packetbl_$(VERSION).deb
 	
-deb: all
-	/bin/bash ./gen_package.sh $(prefix)
+#deb: all
+#	/bin/bash ./gen_package.sh $(prefix)
 
-extract_deb: deb
-	dpkg-deb -X ../packetbl_$(VERSION).deb ${DEST_DIR}
+#extract_deb: deb
+#	dpkg-deb -X ../packetbl_$(VERSION).deb ${DEST_DIR}
 
-install: deb
-	-$(INSTALL) -d $(bindir)
-	-$(INSTALL) -d $(sysconfdir)
-	@if [ -f "$(CONFIGFILE)" ]; then \
-	echo "$(INSTALL) -m 644 config $(CONFIGFILE).dist"; \
-	$(INSTALL) -m 644 config $(CONFIGFILE).dist;  \
-	else \
-	echo "$(INSTALL) -m 644 config $(CONFIGFILE)"; \
-	$(INSTALL) -m 644 config $(CONFIGFILE);  \
-	fi
-	$(INSTALL) -m 755 ../bin/packetbl $(bindir)/packetbl
-	$(INSTALL) -m 755 ../bin/packetbl_getstat $(bindir)/packetbl_getstat
+#install: deb
+#	-$(INSTALL) -d $(bindir)
+#	-$(INSTALL) -d $(sysconfdir)
+#	@if [ -f "$(CONFIGFILE)" ]; then \
+#	echo "$(INSTALL) -m 644 config $(CONFIGFILE).dist"; \
+#	$(INSTALL) -m 644 config $(CONFIGFILE).dist;  \
+#	else \
+#	echo "$(INSTALL) -m 644 config $(CONFIGFILE)"; \
+#	$(INSTALL) -m 644 config $(CONFIGFILE);  \
+##	fi
+#	$(INSTALL) -m 755 ../bin/packetbl $(bindir)/packetbl
+#	$(INSTALL) -m 755 ../bin/packetbl_getstat $(bindir)/packetbl_getstat
