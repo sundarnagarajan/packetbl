@@ -9,7 +9,8 @@ BUILD_DIR=${PROG_DIR}/deb_build
 PKG_NAME_DIR="${BUILD_DIR}/${PKG_NAME}-${VERSION}"
 SRC_DIR="${PKG_NAME_DIR}/src"
 
-VERBOSE_FLAG="-v "
+# VERBOSE_FLAG="-v "
+VERBOSE_FLAG=" "
 
 function create_dirs() {
     cd "${PROG_DIR}"
@@ -17,6 +18,7 @@ function create_dirs() {
     mkdir -p "${PKG_NAME_DIR}/bin"
     cp -a ${VERBOSE_FLAG} "${PROG_DIR}/debian" "${PKG_NAME_DIR}"/
     cp -a ${VERBOSE_FLAG} "${PROG_DIR}/src" "${PKG_NAME_DIR}/"
+    cp -a ${VERBOSE_FLAG} "${PROG_DIR}/pkg_files" "${PKG_NAME_DIR}/"
 }
 
 

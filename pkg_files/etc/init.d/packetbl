@@ -1,0 +1,77 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		packetbl
+# Required-Start:	
+# Required-Stop:	
+# Default-Start:	2 3 4 5
+# Default-Stop:	0 1 6
+# Short-Description:	RBL client
+### END INIT INFO
+
+
+
+
+BIN=/usr/local/bin/packetbl
+ETC_PATH=/usr/local/etc/packetbl
+ACTION=$1
+
+
+get_config_files() {
+
+	CONFIG_FILES=`find $ETC_PATH -maxdepth 1 -name *.conf`
+	# get files with theirs path include
+}
+
+
+get_packetbl_running_processes() {
+	ps aux | grep $BIN | egrep -v grep >/dev/null
+	if [ 0 ]; then
+		PIDS=`ps aux | grep $BIN | egrep -v grep | awk '{ print $2 }'`
+	fi
+}
+
+
+run_stop()
+{
+	get_packetbl_running_processes
+	if [ "x$PIDS" != "x" ]; then
+		kill $PIDS
+	fi
+		
+}
+
+run_start()
+{
+	get_config_files
+	if [ "x$CONFIG_FILES" != "x" ]; then
+		for FILE in $CONFIG_FILES
+		do
+			$BIN -f $FILE
+		done
+	fi
+}
+
+
+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
+
+case "$ACTION" in
+  start)
+	run_start
+	;;
+  stop)
+	run_stop
+	;;
+
+  restart)
+	run_stop
+	run_start
+	;;
+
+  *)
+	echo "Usage: /etc/init.d/packetbl {start|stop|restart}" 
+	exit 1
+esac
+
+exit 0
+

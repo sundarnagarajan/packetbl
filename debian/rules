@@ -15,8 +15,10 @@ override dh_autoconfigure:
 override_dh_auto_build:
 	src/build.sh
 	rm -rf debian/$(PKG_NAME)/usr debian/$(PKG_NAME)/etc
-	cd src; make deb
-	cd src; DEST_DIR=../debian/$(PKG_NAME) make extract_deb
+	cd src; make
+	cp -av pkg_files/* debian/$(PKG_NAME)/
+	mkdir -p debian/$(PKG_NAME)/usr/local/bin
+	cp bin/* debian/$(PKG_NAME)/usr/local/bin/
 override_dh_auto_test:
 override_dh_prep:
 	mkdir -p debian/$(PKG_NAME)/DEBIAN
