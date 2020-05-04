@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 PKG_NAME = packetbl
-VERSION = 0.8-beta3build04
+VERSION = 0.8-beta3build05
 
 DISTRIBUTION = $(shell sed -n "s/^VERSION_CODENAME=//p" /etc/os-release)
 PACKAGEVERSION = $(VERSION)-0~$(DISTRIBUTION)0
@@ -17,8 +17,8 @@ override_dh_auto_build:
 	rm -rf debian/$(PKG_NAME)/usr debian/$(PKG_NAME)/etc
 	cd src; make
 	cp -av pkg_files/* debian/$(PKG_NAME)/
-	mkdir -p debian/$(PKG_NAME)/usr/local/bin
-	cp bin/* debian/$(PKG_NAME)/usr/local/bin/
+	mkdir -p debian/$(PKG_NAME)/usr/lbin
+	cp bin/* debian/$(PKG_NAME)/usr/bin/
 override_dh_auto_test:
 override_dh_prep:
 	mkdir -p debian/$(PKG_NAME)/DEBIAN
