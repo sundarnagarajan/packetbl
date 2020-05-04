@@ -44,19 +44,6 @@ chmod 755 ${BIN_DIR}/packetbl
 /etc/init.d/packetbl restart
 
 exit 0;" > $PACKAGE_DIR/DEBIAN/postinst
-echo "#!/bin/bash
-
-$HEAD
-
-if [ ! -f \"/usr/include/libpool.h\" ]; then
-	cd /usr/share/doc/libdotconf-dev/examples/libpool/
-	gzip -d pool.c.gz > /dev/null
-	make > /dev/null
-	cp libpool.a /usr/lib
-	cp libpool.h /usr/include
-fi
-	
-exit 0;" > $PACKAGE_DIR/DEBIAN/preinst
 
 echo "Package: packetbl
 Version: $VERSION
