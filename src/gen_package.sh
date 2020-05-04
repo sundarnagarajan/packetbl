@@ -68,7 +68,6 @@ fi
 
 
 # permissions
-chmod 555 $PACKAGE_DIR/DEBIAN/preinst
 chmod 555 $PACKAGE_DIR/DEBIAN/postinst
 
 
