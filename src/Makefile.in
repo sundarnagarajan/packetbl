@@ -36,7 +36,7 @@ packetbl_getstat.o: config.h packetbl_getstat.c packetbl.h
 	$(CC) $(CFLAGS) -c $(DEFS) packetbl_getstat.c -o packetbl_getstat.o
 
 clean:
-	-rm -f packetbl.o ../bin/packetbl packetbl_getstat.o ../bin/packetbl_getstat ../packetbl_$(VERSION).deb pool.o libpool.a
+	-rm -f packetbl.o ../bin/packetbl packetbl_getstat.o ../bin/packetbl_getstat ../packetbl_$(VERSION).deb pool.o libpool.a libpool.h pool.c
 
 distclean:
 	-rm -f Makefile packetbl.o ../bin/packetbl packetbl_getstat.o ../bin/packetbl_getstat config.log config.status config.h ../packetbl_$(VERSION).deb
