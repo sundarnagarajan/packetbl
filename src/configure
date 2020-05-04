@@ -594,7 +594,7 @@ SHELL=${CONFIG_SHELL-/bin/sh}
 # Identity of this package.
 PACKAGE_NAME='packetbl'
 PACKAGE_TARNAME='packetbl'
-PACKAGE_VERSION='0.8'
+PACKAGE_VERSION='0.8-beta1'
 PACKAGE_STRING="packetbl $PACKAGE_VERSION"
 PACKAGE_BUGREPORT=''
 
@@ -4415,6 +4415,21 @@ cat >>confdefs.h <<\_ACEOF
 _ACEOF
 
 	LIBS="$LIBS -lpool"
+
+else
+	dpkg -l | grep libdotconf-dev > /dev/null
+    if [ -f /usr/share/doc/libdotconf-dev/examples/libpool/libpool.h -a -f /usr/share/doc/libdotconf-dev/examples/libpool/pool.c.gz ]; then
+        cp /usr/share/doc/libdotconf-dev/examples/libpool/libpool.h .
+        gzip -dc /usr/share/doc/libdotconf-dev/examples/libpool/pool.c.gz > pool.c
+	else
+		{ { $as_echo "$as_me:$LINENO: error: in \`$ac_pwd':" >&5
+		$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+		{ { $as_echo "$as_me:$LINENO: error: You must have dotconf (libpool), install the package \"libdotconf-dev\"
+See \`config.log' for more details." >&5
+$as_echo "$as_me: error: You must have dotconf (libpool), install the package \"libdotconf-dev\"
+See \`config.log' for more details." >&2;}
+		{ (exit 1); exit 1; }; }; }
+	fi
 fi
 
 
